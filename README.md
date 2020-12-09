@@ -1,24 +1,7 @@
-# demo1
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+github api: https://developer.github.com/v3/repos/contents/#get-contents
+owner
+repo
+path
+ref
+https://api.github.com/repos/:owner/:repo/contents/:path?ref=commit|branch|tag
+https://api.github.com/repos/cuilongjin/static/contents/img

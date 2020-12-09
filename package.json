@@ -1,0 +1,21 @@
+{
+  "name": "@cuilongjin/static",
+  "version": "1.0.0",
+  "description": "静态资源仓库",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cuilongjin/static.git"
+  },
+  "author": "cuilongjin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cuilongjin/static/issues"
+  },
+  "homepage": "https://github.com/cuilongjin/static#readme"
+}

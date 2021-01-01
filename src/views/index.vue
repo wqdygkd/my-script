@@ -18,7 +18,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'Index',
   data() {
@@ -46,7 +45,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang='less'>
 #app {
   margin-top: 60px;
 }
@@ -54,10 +53,14 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
-.item {
-  width: 200px;
-  float: left;
-  margin: 10px;
+  .item {
+    width: 200px;
+    float: left;
+    margin: 10px;
+    .el-image {
+      width: 160px;
+      height: 160px;
+    }
+  }
 }
 </style>

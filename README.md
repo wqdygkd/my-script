@@ -1,5 +1,6 @@
 # static
 静态资源仓库
 
-git reflog expire --expire=now --all
-git gc --aggressive --prune=all
+img：图床
+config-files：配置文件
+colab-script：脚本

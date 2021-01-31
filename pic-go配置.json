@@ -1,0 +1,39 @@
+{
+  "uploaded": [],
+  "picBed": {
+    "current": "github",
+    "uploader": "github",
+    "smms": {
+      "token": ""
+    },
+    "github": {
+      "branch": "main",
+      "customUrl": "https://cdn.jsdelivr.net/gh/cuilongjin/static@main",
+      "path": "img/",
+      "repo": "cuilongjin/static",
+      "token": "???"
+    }
+  },
+  "settings": {
+    "shortKey": {
+      "picgo:upload": {
+        "enable": true,
+        "key": "CommandOrControl+Shift+P",
+        "name": "upload",
+        "label": "快捷上传"
+      }
+    },
+    "server": {
+      "port": 36677,
+      "host": "127.0.0.1",
+      "enable": true
+    },
+    "showUpdateTip": true,
+    "autoRename": true,
+    "rename": false
+  },
+  "picgoPlugins": {},
+  "debug": true,
+  "PICGO_ENV": "GUI",
+  "needReload": false
+}

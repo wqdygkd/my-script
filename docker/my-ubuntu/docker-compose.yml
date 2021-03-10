@@ -1,6 +1,6 @@
 version: '3'
 services:
-   ubuntu:
+    ubuntu:
         image: cuilongjin/my-ubuntu:1.5
         container_name: ubuntu
         command:

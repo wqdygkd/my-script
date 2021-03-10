@@ -1,0 +1,10 @@
+version: '3'
+services:
+    ubuntu:
+        image: snowdreamtech/frps
+        container_name: my-frps
+        tty: true
+        network_mode: "host"
+        restart: always
+        volumes:
+            - /root/my-file/frps.ini:/etc/frp/frps.ini

@@ -1,0 +1,42 @@
+version: '3'
+services:
+    # ubuntu
+    myubuntu:
+        image: cuilongjin/my-ubuntu:1.5
+        container_name: myubuntu
+        command:
+            - bt start # 启动宝塔
+            - service aria2 start # 启动 aria2
+            - service nginx start # 启动 nginx
+        tty: true
+        ports:
+            - '80:80' # web
+            - '8889:8889' # 宝塔
+            - '6801:6800' # aria2 rpc
+            - '6881:6880' # AriaNg
+            - '33:33' # ssh
+        volumes:
+            - '/root/my-file:/root/my-file'
+    # frp 服务端
+    myfrps:
+        image: snowdreamtech/frps
+        container_name: myfrps
+        tty: true
+        #network_mode: "host"
+        restart: always
+        ports:
+            - '8080:8080' # web
+            - '7000:7000' # frp
+            - '7500:7500' # frp
+        volumes:
+            - /root/my-file/frps.ini:/etc/frp/frps.ini
+
+    # frp 客户端
+    myfrpc:
+        image: snowdreamtech/frpc
+        # container_name: myfrpc
+        tty: true
+        network_mode: "host"
+        restart: always
+        volumes:
+            - /root/my-file/frpc.ini:/etc/frp/frpc.ini

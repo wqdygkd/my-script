@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         爱家登录
 // @namespace    http://tampermonkey.net/
-// @version      0.12
+// @version      0.13
 // @description  爱家pc端切换登录，移动端自动登录，自动设置背景图
 // @author       zhang333
 // @include      *://broker.mklij.com*
@@ -10,6 +10,7 @@
 // @include      *://broker-dev.mklij.com*
 // @include      *://broker-h5-dev.mklij.com*
 // @include      *://localhost:7520/*
+// @include      *://localhost:9520/*
 // @grant GM_setValue
 // @grant GM_getValue
 // @grant GM_cookie
@@ -139,32 +140,32 @@
 })()
 
 /*------------鼠标点击文字效果-start-------------*/
-$(document).ready(function() {
-    var f_idx = 0;
-    var c_idx = 0;
-    $("body").click(function(e) {
-        var font = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
-        var color = new Array('#ff0000', '#eb4310', '#f6941d', '#fbb417', '#ffff00', '#cdd541', '#99cc33', '#3f9337', '#219167', '#239676', '#24998d', '#1f9baa', '#0080ff', '#3366cc', '#333399', '#003366', '#800080', '#a1488e', '#c71585', '#bd2158');
-        var $i = $("<span />").text(font[f_idx]);
-        f_idx = (f_idx + 1) % font.length;
-        c_idx = (c_idx + 1) % color.length;
-        var x = e.pageX,
-            y = e.pageY;
-        $i.css({
-            "z-index": 9999,
-            "top": y - 20,
-            "left": x,
-            "font-family": "Roboto Mono",
-            "position": "absolute",
-            "font-weight": "900",
-            "color": color[c_idx]
-        });
-        $("body").append($i);
-        $i.animate({
-            "top": y - 180,
-            "opacity": 0
-        }, 1500, function() {
-            $i.remove()
-        })
-    })
-})
+// $(document).ready(function() {
+//     var f_idx = 0;
+//     var c_idx = 0;
+//     $("body").click(function(e) {
+//         var font = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+//         var color = new Array('#ff0000', '#eb4310', '#f6941d', '#fbb417', '#ffff00', '#cdd541', '#99cc33', '#3f9337', '#219167', '#239676', '#24998d', '#1f9baa', '#0080ff', '#3366cc', '#333399', '#003366', '#800080', '#a1488e', '#c71585', '#bd2158');
+//         var $i = $("<span />").text(font[f_idx]);
+//         f_idx = (f_idx + 1) % font.length;
+//         c_idx = (c_idx + 1) % color.length;
+//         var x = e.pageX,
+//             y = e.pageY;
+//         $i.css({
+//             "z-index": 9999,
+//             "top": y - 20,
+//             "left": x,
+//             "font-family": "Roboto Mono",
+//             "position": "absolute",
+//             "font-weight": "900",
+//             "color": color[c_idx]
+//         });
+//         $("body").append($i);
+//         $i.animate({
+//             "top": y - 180,
+//             "opacity": 0
+//         }, 1500, function() {
+//             $i.remove()
+//         })
+//     })
+// })

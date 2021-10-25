@@ -1,9 +1,0 @@
-{
-  "name": "@cuilongjin/static",
-  "version": "1.0.0",
-  "description": "配置、脚本",
-  "main": "index.js",
-  "author": "c",
-  "license": "MIT",
-  "homepage": "https://github.com/cuilongjin/static#readme"
-}

@@ -10,5 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "got": "^11.8.2"
+  },
+  "devDependencies": {
+    "eslint-config-wqdy": "^0.0.2"
   }
 }

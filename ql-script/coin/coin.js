@@ -1,29 +1,40 @@
 const got = require('got')
 const $ = new Env('韭菜价格')
 
+const Decimal = require('decimal.js')
+
 const notify = $.isNode() ? require('./sendNotify') : ''
 
 ;(async () => {
-  const symbolList = ['BTC_USDT', 'ETH_USDT', 'SHIB_USDT', 'EOS_USDT', 'DOGE_USDT']
-  const base = 'https://www.mexc.com'
-
   try {
     const api = got.extend({
       retry: { limit: 0 },
       responseType: 'json'
     })
 
-    let desc = ''
-    const response = symbolList.map(async item => {
-      return (await api(`${base}/open/api/v2/market/ticker?symbol=${item}`)).body.data[0]
-    })
+    let desc = '火币数据\n'
+    const huobi = ['btcusdt', 'ethusdt', 'shibusdt', 'eosusdt', 'dogeusdt']
+    const mocha = ['PIG_USDT']
 
-    const data = await Promise.all(response)
-    for (const item of data) {
-      let { symbol, last, change_rate: changeRate } = item
-      symbol = symbol.match(/(\S*)_/)[1]
-      desc += `${formatString(symbol, 5, 1)}${formatString('$' + last, 14, 2)}${formatString((changeRate * 100).toFixed(5), 12, 2)}%\n`
+    for (const symbol of huobi) {
+      const res = (await api(`https://vercel-serverless-openapi.vercel.app/api/huobi?api=market/history/kline&symbol=${symbol}&period=1day&size=1`)).body.data[0]
+      const { close, open } = res
+      desc += `${formatString(symbol, 7, 1)}`
+      desc += `${formatString('$' + close, 14, 2)} `
+      desc += `${formatString(((close / open - 1) * 100).toFixed(2), 7, 2)}%\n`
     }
+
+    desc += '\n抹茶数据\n'
+    for (let symbol of mocha) {
+      const res = (await api(`https://www.mexc.com/open/api/v2/market/kline?symbol=${symbol}&interval=1d&limit=1`)).body.data[0]
+      const close = res[2]
+      const open = res[1]
+      symbol = symbol.match(/(\S*)_/)[1]
+      desc += `${formatString(symbol, 5, 1)}`
+      desc += `${formatString('$' + new Decimal(close).toFixed(), 14, 2)} `
+      desc += `${formatString((((close * 10_000) / (open * 10_000) - 1) * 100).toFixed(2), 7, 2)}%\n`
+    }
+
     console.log(desc)
     if ($.isNode()) {
       await notify.sendNotify('韭菜价格', desc)
@@ -36,7 +47,7 @@ const notify = $.isNode() ? require('./sendNotify') : ''
 function formatString (string_, length, type) {
   const blank = '                             '
   if (string_.length < length) {
-    const string__ = blank.slice(0, length - string_.length) * 2
+    const string__ = blank.slice(0, (length - string_.length))
     if (type === 1) {
       string_ += string__
     } else if (type === 2) {

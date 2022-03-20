@@ -10,7 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "decimal.js": "^10.3.1",
-    "got": "^11.8.2"
+    "got": "^11.8.2",
+    "winston": "^3.6.0"
   },
   "devDependencies": {
     "eslint-config-wqdy": "^0.0.2"

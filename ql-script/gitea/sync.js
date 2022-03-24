@@ -3,7 +3,7 @@
 
 const $ = new Env('sync')
 const got = require('got')
-const githubToken = process.env.githubToken || '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'
+const githubToken = process.env.githubToken || ''
 const giteaToken = process.env.giteaToken || 'f8287de644a16b41a580fcb34204dc7ad49aff6f'
 
 try {

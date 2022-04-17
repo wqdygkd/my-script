@@ -1,0 +1,14 @@
+{
+  "name": "my-script",
+  "description": "自用脚本",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "c",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint-config-wqdy": "^0.0.3"
+  }
+}

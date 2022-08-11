@@ -28,12 +28,7 @@
   }
 
   function createDom () {
-    const domStr = `
-      <li tabindex="-1" class="el-dropdown-menu__item">
-        <i class="iconfont iconfont-grzx">
-          登录H5
-      </li>
-      `
+    const domStr = '<li tabindex="-1" class="el-dropdown-menu__item">🤡登录H5</li>'
 
     const host = {
       'localhost:7520': 'https://broker-h5-dev.mklij.com',

@@ -19,3 +19,8 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
+
+# 清华源 https://pypi.tuna.tsinghua.edu.cn/simple
+# 阿里源 https://mirrors.aliyun.com/pypi/simple/
+# 腾讯源 http://mirrors.cloud.tencent.com/pypi/simple
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple

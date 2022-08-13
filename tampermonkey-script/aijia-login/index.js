@@ -11,40 +11,39 @@
 // ==/UserScript==
 
 (async function () {
-
   window.addEventListener('popstate', function (event) {
     if (event.target.location.pathname !== '/login') {
-      run();
+      run()
     }
-  });
+  })
 
   function run () {
-    const aside = document.querySelector('.scroll-container.page-aside.sidebar-container');
-    aside.style.overflowY = 'auto';
+    const aside = document.querySelector('.scroll-container.page-aside.sidebar-container')
+    aside.style.overflowY = 'auto'
 
-    const userheader = document.querySelector('.el-dropdown-menu.el-popper.user-header');
-    userheader.append(createDom());
+    const userheader = document.querySelector('.el-dropdown-menu.el-popper.user-header')
+    userheader.append(createDom())
   }
 
   function createDom () {
-    const domStr = '<li tabindex="-1" class="el-dropdown-menu__item">🤡登录H5</li>';
+    const domStr = '<li tabindex="-1" class="el-dropdown-menu__item">🤡登录H5</li>'
 
     const host = {
       'localhost:7520': 'https://broker-h5-dev.mklij.com',
       'broker-dev.mklij.com': 'https://broker-h5-dev.mklij.com',
       'broker.mklij.com': 'https://broker-h5.mklij.com'
-    };
+    }
 
-    const document = new DOMParser().parseFromString(domStr, 'text/html');
-    const dom = document.querySelector('.el-dropdown-menu__item');
+    const document = new DOMParser().parseFromString(domStr, 'text/html')
+    const dom = document.querySelector('.el-dropdown-menu__item')
     dom.addEventListener('click', async function () {
-      const token = await cookieStore.get('aika-token');
-      const newUrl = `${host[location.host]}?token=${token.value}&redirectUrl=${host[location.host]}`;
-      window.open(newUrl);
-    });
+      const token = await cookieStore.get('aika-token')
+      const newUrl = `${host[location.host]}?token=${token.value}&redirectUrl=${host[location.host]}`
+      window.open(newUrl)
+    })
     return dom
   }
-})();
+})()
 
 // function nodeToString (node) {
 //   let tmpNode = document.createElement('div')

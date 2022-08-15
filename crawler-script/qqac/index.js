@@ -7,11 +7,11 @@ import ora from 'ora'
 import { fileURLToPath } from 'node:url'
 // const _packageJson = fs.readFileSync(path.resolve(__dirname, './package.json'))
 
-import extractData from './extract-data'
-import decode from './decode'
+import extractData from './extract-data.js'
+import decode from './decode.js'
 
 import { baseUrl, outputFolder, startPage, endPage, id } from './config.js'
-import downloadImage from './download'
+import downloadImage from './download.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -35,7 +35,6 @@ const main = async page => {
   const originData = await extractData(url)
   spinner.succeed()
   console.log(chalk.green('> 提取数据：完成'))
-
   const data = decode(originData)
   console.log(chalk.green('> 解密数据：完成'))
   console.log(chalk.green('> 开始下载图片'))
@@ -48,7 +47,7 @@ const main = async page => {
   // await page.setJavaScriptEnabled(false)
   // console.log(chalk.blue('> 禁用JavaScript: 完成'))
 
-  await main(page)
+  await main()
 
-  await browser.close()
+  // await browser.close()
 })()

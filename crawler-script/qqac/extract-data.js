@@ -17,7 +17,7 @@ export default async url => {
   }
 
   return {
-    DATA: window.data,
+    DATA: window.DATA,
     nonce: window.nonce
   }
 }

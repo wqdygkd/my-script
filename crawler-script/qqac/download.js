@@ -1,7 +1,11 @@
 import path from 'node:path'
 import chalk from 'chalk'
 import fs from 'node:fs'
+import got from 'got'
 
+import makeDir from 'make-dir'
+
+import ProgressBar from './progress.js'
 import { dirExists } from './folder.js'
 
 const data = {
@@ -38,14 +42,20 @@ const data = {
   ]
 }
 
-const downloadImageSingle = async () => {}
+const downloadImageSingle = async (item, downloadFolder) => {
+  if (item.url) {
+    const res = await got(item.url)
+  }
+}
 
 const downloadImage = async (data, output) => {
   const { comic, chapter, picture } = data
   const { id, title, isFinish } = comic
   const { nextCid, cid } = chapter
 
-  const downloadFolder = path.join(output, `${title}${id}`, cid)
+  const downloadFolder = path.join(output, `${title}${id}`, String(cid))
+  // const path = await makeDir('unicorn/rainbow/cake');
+
   await dirExists(downloadFolder)
   console.log(chalk.green(`> 创建 downloadFolder 文件夹：${downloadFolder} 创建完成`))
 
@@ -54,7 +64,6 @@ const downloadImage = async (data, output) => {
     await downloadImageSingle(picture[i], downloadFolder)
     progress.render({ completed: i + 1, total: picture.length })
   }
-  // if (isFinish) return isFinish
 }
 
 export default downloadImage

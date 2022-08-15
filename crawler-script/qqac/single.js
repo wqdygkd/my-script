@@ -120,6 +120,7 @@ const downloadImage = async (page, url, folderPrefix) => {
  * @param {*} url 单集url
  * @param {*} folderPrefix 文件夹前缀
  */
+
 const single = async (page, url, folderPrefix) => {
   const { nextPage, isEnd } = await downloadImage(page, url, folderPrefix)
   if (isEnd) return

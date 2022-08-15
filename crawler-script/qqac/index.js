@@ -1,57 +1,48 @@
 import fs from 'node:fs'
+import path from 'node:path'
 import chalk from 'chalk'
 import puppeteer from 'puppeteer'
-
 import ora from 'ora'
 
-// import list from './list.js'
+import { fileURLToPath } from 'node:url'
+// const _packageJson = fs.readFileSync(path.resolve(__dirname, './package.json'))
+
+import extractData from './extract-data'
+import decode from './decode'
+
 import { baseUrl, outputFolder, startPage, endPage, id } from './config.js'
+import downloadImage from './download'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const output = path.resolve(__dirname, outputFolder)
 
 // 当前页
 const currentPage = startPage
 
 // 创建输出文件夹
 const createOutputFolder = () => {
-  if (!fs.existsSync(outputFolder)) {
-    fs.mkdirSync(outputFolder)
-    console.log(chalk.green('> 创建 outputFolder 文件夹：完成'))
+  if (!fs.existsSync(output)) {
+    fs.mkdirSync(output)
+    console.log(chalk.green(`> 创建 output 文件夹：${output} 创建完成`))
   }
-}
-
-const extractLink = async page => {
-  const linkArray = await page.evaluate(() => {
-    return [...document.querySelectorAll('#comicContain li img')].map(v => v.getAttribute('src'))
-  })
-  console.log(chalk.green('> 提取 LINK ：完成 \n'))
-  return linkArray
 }
 
 const main = async page => {
   const url = baseUrl + currentPage
-  const spinner = ora({
-    text: chalk.yellow(`前往 ${url} `),
-    color: 'yellow'
-  })
+  const spinner = ora({ text: chalk.yellow(`提取数据 ${url} `), color: 'yellow' })
   spinner.start()
-
-  await page.goto(url)
+  const originData = await extractData(url)
   spinner.succeed()
+  console.log(chalk.green('> 提取数据：完成'))
 
-  console.log(chalk.green('> 页面跳转：完成'))
-  await page.waitForSelector('body')
-  console.log(chalk.green('> 页面渲染：完成'))
-
-  const listArray = await extractLink(page)
-
-  console.log(listArray)
+  const data = decode(originData)
+  console.log(chalk.green('> 解密数据：完成'))
+  console.log(chalk.green('> 开始下载图片'))
+  await downloadImage(data, output)
 }
 
 (async () => {
-  const browser = await puppeteer.launch()
-  console.log(chalk.blue('> 浏览器启动: 完成'))
-
-  const page = await browser.newPage()
-
   createOutputFolder()
 
   // await page.setJavaScriptEnabled(false)

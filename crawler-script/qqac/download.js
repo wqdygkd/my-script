@@ -1,12 +1,12 @@
 import path from 'node:path'
-import chalk from 'chalk'
 import fs from 'node:fs'
-import got from 'got'
 
+import chalk from 'chalk'
+import got from 'got'
 import makeDir from 'make-dir'
+import mime from 'mime-types'
 
 import ProgressBar from './progress.js'
-import { dirExists } from './folder.js'
 
 const data = {
   comic: {
@@ -43,20 +43,21 @@ const data = {
 }
 
 const downloadImageSingle = async (item, downloadFolder) => {
-  if (item.url) {
-    const res = await got(item.url)
-  }
+  const { url, pid } = item
+  if (!url) return
+
+  const res = await got(url)
+  const type = res.headers['content-type']
+  const extension = mime.extension(type)
+  await fs.writeFileSync(`${downloadFolder}/${pid}.${extension}`, res.rawBody)
 }
 
 const downloadImage = async (data, output) => {
   const { comic, chapter, picture } = data
   const { id, title, isFinish } = comic
   const { nextCid, cid } = chapter
-
   const downloadFolder = path.join(output, `${title}${id}`, String(cid))
-  // const path = await makeDir('unicorn/rainbow/cake');
-
-  await dirExists(downloadFolder)
+  await makeDir(downloadFolder)
   console.log(chalk.green(`> 创建 downloadFolder 文件夹：${downloadFolder} 创建完成`))
 
   const progress = new ProgressBar(`> 第${cid}页 下载进度`, 50)

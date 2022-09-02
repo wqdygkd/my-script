@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         爱家登录脚本
 // @namespace    http://tampermonkey.net/
-// @version      0.14
+// @version      0.15
 // @description  移动端登录
 // @author       zhang333
 // @include      *://broker.mklij.com*
@@ -11,23 +11,28 @@
 // ==/UserScript==
 
 (async function () {
-
   window.addEventListener('popstate', function (event) {
     if (event.target.location.pathname !== '/login') {
       run();
     }
   });
 
+  run();
+
   function run () {
     const aside = document.querySelector('.scroll-container.page-aside.sidebar-container');
     aside.style.overflowY = 'auto';
 
     const userheader = document.querySelector('.el-dropdown-menu.el-popper.user-header');
-    userheader.append(createDom());
+
+    const loginh5 = document.querySelector('.el-dropdown-menu.el-popper.user-header .loginh5');
+    if (!loginh5) {
+      userheader.append(createDom());
+    }
   }
 
   function createDom () {
-    const domStr = '<li tabindex="-1" class="el-dropdown-menu__item">🤡登录H5</li>';
+    const domStr = '<li tabindex="-1" class="el-dropdown-menu__item loginh5">🤡登录H5</li>';
 
     const host = {
       'localhost:7520': 'https://broker-h5-dev.mklij.com',

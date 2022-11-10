@@ -24,7 +24,6 @@
 // @grant        GM_registerMenuCommand
 // @grant        GM_cookie
 
-// https://www.tampermonkey.net/documentation.php#_run_at
-// @run-at       document-end // 脚本执行时机
+// @run-at       document-end // 脚本执行时机 https://www.tampermonkey.net/documentation.php#_run_at
 // @require      https://code.jquery.com/jquery-2.1.4.min.js // 引入脚本
 // ==/UserScript==
